@@ -3,6 +3,7 @@ import random
 number_of_picks = int(input("How many quick picks? "))
 # Ask the user for the amount of quick picks to generate.
 quick_picks = []
+# TODO Convert the two for loops into a list comprehension.
 for i in range(0, number_of_picks):
     current_pick = []
     for n in range(0, 6):

@@ -11,7 +11,7 @@ class ConvertMiles(App):
     def build(self):
         self.title = 'Convert Miles to Kilometres'
         self.root = Builder.load_file('convert_m_to_km.kv')
-        Window.size = (500, 300)
+        Window.size = (700, 300)
         return self.root
 
     def handle_increment(self, increment):
@@ -22,7 +22,7 @@ class ConvertMiles(App):
     def convert_miles(self):
         miles = self.get_valid_miles()
         km = miles * MILES_TO_KM
-        self.root.ids.output_label.text = "{} miles is {}".format(self.root.ids.input_number.text, km)
+        self.root.ids.output_label.text = "{} miles is {} kilometres".format(self.root.ids.input_number.text, km)
 
     def get_valid_miles(self):
         try:
@@ -30,5 +30,8 @@ class ConvertMiles(App):
             return value
         except ValueError:
             return 0
+
+    def clear_miles(self):
+        self.root.ids.input_number.text = '0'
 
 ConvertMiles().run()

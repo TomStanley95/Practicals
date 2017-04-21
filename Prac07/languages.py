@@ -1,6 +1,6 @@
 __author__ = 'Tom Stanley'
 
-from Prac07.programming_language import ProgrammingLanguage
+from Prac07.ProgrammingLanguage import ProgrammingLanguage
 
 ruby = ProgrammingLanguage("Ruby", "Dynamic", True, 1995)
 python = ProgrammingLanguage("Python", "Dynamic", True, 1991)

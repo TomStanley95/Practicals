@@ -15,5 +15,4 @@ class ProgrammingLanguage:
     def is_dynamic(self):
         if self.typing == "Dynamic":
             return True
-        else:
-            return False
+        return False

@@ -5,6 +5,7 @@ Car class
 """
 from random import randrange
 
+
 class Car:
     """ represent a car object """
 
@@ -69,7 +70,7 @@ class UnreliableCar(Car):
         self.name = name
         self.fuel = fuel
         self.odometer = 0
-        self.reliability = reliability
+        self.reliability = float(reliability)
 
     def drive(self, distance):
         """ drive the car a given distance if it has enough fuel or drive until fuel runs out
@@ -85,4 +86,25 @@ class UnreliableCar(Car):
             self.odometer += distance_driven
             return distance_driven
         else:
-            return "Your car refuses to start"
+            print("Your car refuses to start!")
+
+
+class SilverServiceTaxi(Taxi):
+    """ Specialised version of taxi """
+    flag_fall = 4.50
+
+    def __init__(self, name, fuel, fanciness=0.0):
+        super().__init__(name, fuel)
+        self.price_per_km = Taxi.price_per_km * fanciness
+
+    def get_fare(self):
+        """ get the price for the taxi trip """
+        return (self.price_per_km * self.current_fare_distance) + self.flag_fall
+
+    def __str__(self):
+        """ return a string representation like a car but with current fare distance"""
+        # return ""
+        # return "{}, fuel={}, odo={}".format(self.name, self.fuel, self.odometer)
+        # return "{}, {}km on current fare, ${:.2f}/km".format(super().__str__(), self.current_fare_distance,
+        #                                                      self.price_per_km)
+        return "{} plus flag fall of ${:.2f}".format(super().__str__(), self.flag_fall)

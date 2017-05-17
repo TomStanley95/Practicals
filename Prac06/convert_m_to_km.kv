@@ -1,0 +1,61 @@
+<Widget>:
+    canvas.before:
+        Color:
+            rgba: 255, 255, 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    color: 0, 0, 0, 1
+
+<Button>:
+    font_size: 56
+    background_normal: ''
+    canvas.after:
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            rectangle: self.x + 1, self.y + 1, self.width - 1, self.height - 1
+<TextInput>
+#TODO Figure out how to change the cursor color and the text you input color
+    font_size: 56
+    background_normal: ''
+    canvas.after:
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            rectangle: self.x + 1, self.y + 1, self.width - 1, self.height - 1
+
+<Label>
+    color: 0, 0, 0, 1
+
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            orientation: 'horizontal'
+            TextInput:
+                id: input_number
+                text: ' '
+                font_size: 48
+                on_text: app.convert_miles()
+        BoxLayout:
+            orientation: 'vertical'
+            Button:
+                text: 'Up'
+                on_press: app.handle_increment(1)
+            Button:
+                text: 'Down'
+                on_press: app.handle_increment(-1)
+            Button:
+                text: 'Clear'
+                on_press: app.clear_miles()
+    BoxLayout:
+#        orientation: 'vertical'
+#        Button:
+#            text: 'Convert miles to km'
+#            on_press: app.convert_miles()
+        Label:
+            id: output_label
+            font_size: 48
+            text: ' '

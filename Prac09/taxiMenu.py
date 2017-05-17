@@ -8,6 +8,7 @@ TAXIS = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2), SilverServiceTax
 def main():
     print("Let's drive!")
     bill_to_date = 0
+    taxi_choice = choose_taxi()
     menu_choice = get_valid_menu_choice()
     while menu_choice != 'q':
         if menu_choice == 'c':
@@ -59,7 +60,23 @@ def list_taxis():
 
 def choose_taxi():
     list_taxis()
-    taxi_choice = int(input("Choose taxi:"))
+    length_taxi_list = len(TAXIS)
+    taxi_choice = get_input_within_limits("Taxi choice", 0, length_taxi_list)
     taxi = TAXIS[taxi_choice]
     return taxi
+
+
+def get_input_within_limits(value_name, value_min, value_max):
+    """
+    This function gets an input for value_name and determines if it is inside two limits passed into the function
+    """
+    while True:
+        try:
+            value = int(input("Enter your {}:".format(value_name)))
+            while value < value_min or value > value_max:
+                print("{}  must be between {} and {}".format(value_name, value_min, value_max))
+                value = int(input("Enter a valid {} number:".format(value_name)))
+            return value
+        except ValueError:
+            print("Invalid input; enter a valid number")
 main()

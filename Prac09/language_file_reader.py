@@ -16,31 +16,30 @@ def main():
     """ read a file of programming language details, save as objects, display """
     languages = []
     # open the file for reading
-    in_file = open('languages.csv', 'r')
+    with open('languages.csv', 'r') as in_file:
+        # format is like: Language,Typing,Reflection,Year
+        # 'consume' the first line (header) - we don't need its contents
+        in_file.readline()
 
-    # format is like: Language,Typing,Reflection,Year
-    # 'consume' the first line (header) - we don't need its contents
-    in_file.readline()
+        # all other lines are language data
+        for line in in_file:
+            # print(repr(line))  # debugging
 
-    # all other lines are language data
-    for line in in_file:
-        # print(repr(line))  # debugging
+            # strip newline from end and split it into parts (CSV)
+            parts = line.strip().split(',')
+            # print(parts)  # debugging
 
-        # strip newline from end and split it into parts (CSV)
-        parts = line.strip().split(',')
-        # print(parts)  # debugging
+            # reflection is stored as a string (Yes/No) and we want a Boolean
+            reflection = parts[2] == "Yes"
 
-        # reflection is stored as a string (Yes/No) and we want a Boolean
-        reflection = parts[2] == "Yes"
+            # construct a ProgrammingLanguage object using the elements - year should be an int
+            language = ProgrammingLanguage(parts[0], parts[1], reflection, int(parts[3]))
 
-        # construct a ProgrammingLanguage object using the elements - year should be an int
-        language = ProgrammingLanguage(parts[0], parts[1], reflection, int(parts[3]))
+            # add the language we've just constructed to the list
+            languages.append(language)
 
-        # add the language we've just constructed to the list
-        languages.append(language)
+        # close the file as soon as we've finished reading it
 
-    # close the file as soon as we've finished reading it
-    in_file.close()
 
     # loop through and display all languages (using their str method)
     for language in languages:
